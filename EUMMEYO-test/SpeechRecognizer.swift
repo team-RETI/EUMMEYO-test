@@ -97,7 +97,14 @@ class SpeechRecognizer: ObservableObject {
         guard let url = audioFileURL else { return }
         print("URL : \(url)")
 
+        /// 음성 -> Text
         GPTAPIService.shared.transcribeAudio(url: url)
+            .flatMap { transcript in
+                print("📝 단순 텍스트: \(transcript)")
+                let prompt = GPTAPIService.PROMPT + transcript
+                /// Text -> 요약 Text
+                return GPTAPIService.shared.sendToGPTAPI(prompt)
+            }
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -109,7 +116,7 @@ class SpeechRecognizer: ObservableObject {
                 }
             } receiveValue: { [weak self] text in
                 self?.transcribedText = text
-                print("📝 변환된 텍스트 (GPT): \(text)")
+                print("📝 요약된 텍스트 (GPT): \(text)")
             }
             .store(in: &cancellables)
     }
