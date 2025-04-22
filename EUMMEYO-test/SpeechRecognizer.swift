@@ -65,6 +65,7 @@ class SpeechRecognizer: ObservableObject {
         print("🎙️ 녹음 시작")
     }
     
+    // MARK: - Evan
     /// 녹음 중지 후 텍스트로 변환 요청 - Speech
     func stopRecordingAndTranscribe() {
         audioRecorder?.stop()
@@ -87,6 +88,7 @@ class SpeechRecognizer: ObservableObject {
         }
     }
     
+    // MARK: - Index
     /// 녹음 중지 후 텍스트로 변환 요청 - GPT
     func stopRecordingAndTranscribeGPT() {
         audioRecorder?.stop()
