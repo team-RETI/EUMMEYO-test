@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     @StateObject private var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
@@ -26,7 +25,7 @@ struct ContentView: View {
             
             Button(action: {
                 if isRecording {
-                    speechRecognizer.stopRecordingAndTranscribe()
+                    speechRecognizer.stopRecordingAndTranscribeGPT()
                 } else {
                     speechRecognizer.startRecording()
                 }
